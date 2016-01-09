@@ -2,6 +2,7 @@ require 'yomu'
 require 'ostruct'
 
 module Opi
+  # Parser
   class Parser
     def initialize(text)
       @text = text
@@ -75,7 +76,7 @@ module Opi
     def parse_date(date, year)
       day = date[0..1]
       month = parse_month(date[3..-1])
-      sprintf('%s/%s/20%s', month, day, year)
+      format('%s/%s/20%s', month, day, year)
     end
 
     def parse_amount(amount)
