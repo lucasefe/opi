@@ -14,14 +14,12 @@ while input = inputs.shift
   end
 
   Opi.read_pdf(input) do |text|
-
-    puts text
-    output = format('%s/%s.output', File.dirname(input), File.basename(input, '.csv'))
+    output = format('%s/%s.csv', File.dirname(input), File.basename(input, '.pdf'))
 
     STDOUT.puts format("=> #{input} -> #{output} ")
 
     File.open(output, 'w+') do |f|
-      f.write Opi::Parser.new(text).process
+      f.write Opi::Parser.process(text)
     end
   end
 end

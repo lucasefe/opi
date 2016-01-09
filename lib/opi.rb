@@ -16,6 +16,7 @@ module Opi
 
     yield text
 
+  ensure
     FileUtils.rm(decrypted_pdf)
   end
 end

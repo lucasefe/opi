@@ -4,6 +4,16 @@ require 'ostruct'
 module Opi
   # Parser
   class Parser
+
+    def self.process(text)
+      if text.split("\n")[1].strip == "VISA"
+        parser = new(text)
+        parser.process
+      else
+        fail "Don't know how to process this file"
+      end
+    end
+
     def initialize(text)
       @text = text
     end
