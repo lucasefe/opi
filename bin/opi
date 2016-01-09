@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+# ruby parse.rb GAL/*{VISA,AMEX}.pdf
+
+require_relative '../lib/opi'
+
+pdfs = ARGV
+
+while pdf = pdfs.shift
+  unless File.exist?(pdf)
+    STDERR.puts sprintf("File not found: '%s'", pdf)
+    exit 1
+  end
+
+  Opi.read_pdf(pdf) do |text|
+    csv = sprintf('%s/%s.csv', File.dirname(pdf), File.basename(pdf, '.pdf'))
+    lines = []
+
+    STDOUT.puts sprintf("=> #{pdf} -> #{csv} ")
+
+    File.open(csv, 'w+') do |f|
+      f.write Opi::Parser.new(text).process
+    end
+  end
+end
