@@ -13,7 +13,9 @@ while input = inputs.shift
     exit 1
   end
 
-  Opi.read_input(input) do |text|
+  Opi.read_pdf(input) do |text|
+
+    puts text
     output = format('%s/%s.output', File.dirname(input), File.basename(input, '.csv'))
 
     STDOUT.puts format("=> #{input} -> #{output} ")
